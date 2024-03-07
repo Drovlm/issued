@@ -1,0 +1,119 @@
+.OfMenu {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    font-size: 12px;
+    padding-bottom: 18px;
+    font-family:serif;
+    z-index: 999;
+}
+
+.menu {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 30em;
+    height: 240px;
+    margin-top: -9em;
+    margin-left: -15em;
+    font-size: 12px;
+    background-color: rgb(232, 232, 232);
+    border-radius: 5px;
+}
+
+.menu h1{
+    padding: 10px;
+    padding-left: 20px;
+}
+
+.closeO {
+    width: 100%;
+    height: 30px;
+    text-align:end;
+    justify-content: end;
+    align-items: end;
+    font-size: 30px;
+}
+
+.closeBtn {
+    position: relative;
+    right: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.closeBtn:hover {
+    font-size:32px ;
+}
+
+.navbar-menu {
+    justify-content: end;
+    align-items: end;
+    background-color: white;
+    font-size: 20px;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    transition: 0.3s;
+}
+
+.menu_list {
+    justify-content: end;
+    align-items: end;
+    background-color: white;
+    font-size: 20px;
+    line-height: 25px;
+    height: 25px;
+    width: 40%;
+    text-transform: capitalize;
+    margin: 0 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.arrow {
+    position: relative;
+    width: 100%;
+    height: 25px;
+}
+
+.P {
+    padding: 5px;
+}
+
+.P:hover {
+    background-color: rgb(203, 224, 252);
+}
+
+.gro {
+  display: block;
+}
+
+.text_gro {
+
+    border-style: none;
+    border-radius: 5px;
+
+
+    padding-left: 8px;
+    font-size: 20px;
+    height: 25px;
+    width: 40%;
+    margin: 0 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.text_gro:focus {
+    background-color: rgb(203, 224, 252);
+}

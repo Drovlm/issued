@@ -1,0 +1,241 @@
+.auth-form {   
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.register-form {
+  display: block;
+  padding: 0px 10px;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.regupload {
+  display: flex;
+  padding: 0px 0px;
+  color: white;
+  justify-content: space-around;
+}
+
+.authF {
+  background-color: rgb(232, 232, 232);
+  border-radius: 5px;
+  width: 700px;
+  padding: 20px;
+}
+
+.closeIcon {
+  width: 100%;
+  align-items: end;
+  text-align: end;
+  height: 20px;
+}
+
+.close {
+  width: 20px;
+  font-size: 25px;
+  display: block; 
+  color: aqua;
+}
+
+.close:hover {
+  font-size: 28px;
+  color: #ffb700;
+}
+
+.authF h1{
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  bottom: 10px;
+  color: black;
+}
+
+.register-form {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.binfo {
+  display: flex;
+  width: 45%;
+  flex-direction: column;
+  /*align-items: end;*/
+}
+
+label {
+  text-align: start;
+  padding-top: 0px;
+  color: black;
+  width: 95%;
+}
+
+.text-dangerr {
+  color: red;
+  width: 95%;
+  background-color: rgb(255, 211, 211);
+  padding: 2px;
+  text-align: start;
+}
+
+input {
+  padding-left: 5px;
+  width: 95%;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.auth .inpit:focus{
+  background-color: rgb(203, 224, 252);
+}
+
+.authDiv {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.authBTN {
+  background-color: #ffb700 ;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+select {
+  width: 95%;
+}
+
+.logoUpl {
+  color:#1475cf;
+  font-size: 30px; 
+}
+
+p.imgText {
+  color: black;
+  font-size: 8px;
+  margin-top: 5px;
+}
+
+.imgUpl {
+  object-fit: cover;
+  border-radius: 110px;
+  width: 110px;
+  height: 110px;
+}
+
+.authF p.loglink {
+  background:none;
+  font-size: 14px;
+  padding-top: 25px;
+  cursor:default;
+  color: rgb(70, 69, 69);
+}
+
+.loglinkBTN {
+  cursor: pointer;
+}
+
+.loglinkBTN:hover {
+text-decoration: underline;
+}
+
+.authlink {
+  display: block;
+  padding-top: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.authlink p1 {
+  display: block;
+  color: black;
+}
+
+.external-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.external-links label {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.external-links input {
+  width: 180px;
+  margin-bottom: 8px;
+
+}
+
+.authsignup {
+  display: block;
+  padding-top: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@media screen and (max-width: 785px) {
+  .authF {
+    width: 650px;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 665px) {
+  .authF {
+    width: 500px;
+    padding-left: 5px;
+    padding-right: 10px;
+  }
+
+  label {
+  font-size: 15px;
+  }
+
+  .binfo {
+    width: 40%;
+  }
+
+  .imgUpl {
+    object-fit: cover;
+    border-radius: 110px;
+    width: 75px;
+    height: 75px;
+  }
+  
+  p.imgText {
+    width: 70px;
+    text-align: center;
+  }
+
+  .external-links label {
+    font-size: 15px;
+    margin-right: 5px;
+  }
+
+  .external-links input {
+    width: 150px;
+  }
+}

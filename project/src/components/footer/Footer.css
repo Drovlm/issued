@@ -1,0 +1,171 @@
+.footer{
+    display: block;
+    justify-content: space-between;
+    text-align: left;
+    justify-content: start;
+    align-items: start;
+    
+}
+
+.contants {
+    display: block;
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgb(14, 94, 160);
+    height: 350px;
+    padding: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.con {
+    display: flex;
+    justify-content: space-between;
+}
+
+.phoad {
+    width: 50%;
+    display: block;
+}
+
+.AdresEN {
+    text-align: left;
+    font-size: 10px;
+    display: block;
+}
+
+.AdresEN h1 {
+    padding-top: 10px;
+    display: block;
+}
+
+.Cont {
+    display: inline-block;
+    width: 50%;
+    align-items: center;
+    color: rgb(147, 147, 147);
+    justify-content: center;
+}
+
+.Cont {
+    display: flex;
+    width: 180px;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(147, 147, 147);
+}
+
+.Cont .h1{
+    color: rgb(7, 7, 7);
+    font-size: 50px;
+    background-color: white;
+    transition: 0.2s;
+}
+
+.Cont .h1:hover{
+    color: rgb(0, 128, 255);
+}
+
+.Cont .h2{
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    transition: 0.2s;
+}
+
+.Cont .h2:hover{
+    color: rgb(227, 227, 227);
+    background-color: rgb(20, 141, 241);
+}
+
+.Cont .h3{
+    color: white;
+    font-size: 50px;
+    transition: 0.2s;
+}
+
+.Cont .h3:hover{
+    color: red;
+}
+
+.imgF {
+    width: 70px;    
+}
+
+.CCC {
+    display: block;
+    width: 100%;
+    font-size: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+    border-top: solid;
+    border-width: 1px;
+    border-color: rgb(255, 255, 255);
+    padding-top: 10px;
+}
+
+.CCC h1 {
+    padding-top: 10px;  
+}
+
+@media screen and (max-width: 600px) {
+    AdresEN {
+        font-size: 8px;
+    }
+
+    .Cont {
+        width: 120px;
+    }
+
+    .Cont .h1, .h2 {
+        width: 35px;
+        height: 35px;
+    }
+
+    .Cont .h3 {
+        width: 40px;
+        height: 40px;
+    }
+
+    .CCC {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .contants {
+    padding-left: 20px;
+    padding-right: 20px;
+    }
+
+    .imgF {
+        width: 55px;
+    }
+
+    .AdresEN {
+        font-size: 7px;
+    }
+
+    .Cont {
+        width: 110px;
+    }
+
+    .Cont .h1, .h2 {
+        width: 30px;
+        height: 30px;
+    }
+
+    .Cont .h3 {
+        width: 35px;
+        height: 35px;
+    }
+
+    .CCC {
+        font-size: 7px;
+    }
+}

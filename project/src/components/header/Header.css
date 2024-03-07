@@ -1,0 +1,163 @@
+.header {
+    display:flex;
+    height: 90px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 2rem;
+    border:outset;
+    border-width: 10px;
+    border-color: rgb(0, 166, 232);
+    background-color: white;
+}
+
+.navbar {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.img {
+    display: inline-block;
+    width: 58px;
+    cursor: pointer;
+    margin-right: 25px;
+}
+
+.header h1 {
+    display:inline-block;
+    position: relative;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 350;
+}
+
+.navbar-sign {
+    justify-content: space-between;
+    align-items: center;
+    display:flex;
+    width: 220px;
+    font-size: 18px;
+    margin: 0px 5px;
+}
+
+.navbar-sign p{
+    display: inline-block;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+    color: rgb(147, 147, 147);
+}
+
+.navbar-sign p:active{
+    color:#ffb700 ;
+}
+
+.regBTN{
+    background-color:#ffb700 ;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    padding: 8px;
+    transition: 0.3s;
+  
+}
+
+.navbar-sign button:hover{
+    background-color: #f4af00;
+}
+
+.navbar-sign button:active {
+    background-color: #e0a100;
+}
+
+@media screen and (max-width: 785px) {
+    .header {
+      
+        height: 90px;
+        padding: 0px 1rem;
+   
+    }
+
+    .header h1{
+        font-size: 28px;
+    }
+
+    .navbar-sign {
+        width: 220px;
+        font-size: 18px;
+        margin: 0px 0px;
+    }
+}
+
+
+@media screen and (max-width: 720px) {
+    .img {
+        margin-right: 18px;
+    }
+}
+
+
+@media screen and (max-width: 690px) {
+    
+    .header {
+        height: 90px;
+        padding: 0px 1rem;
+    }
+
+    .navbar h1{
+        font-size: 25px;
+    }
+    .navbar-sign {
+        width: 200px;
+        font-size: 16px;
+    }
+
+    .navbar-sign button{
+    font-size: 12px;
+    padding: 8px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .navbar-sign {
+        width: 180px;
+        font-size: 15px;
+    }
+
+    .navbar-sign button{
+    font-size: 11px;
+    padding: 7px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .header {
+        height: 90px;
+        padding: 0px 5px;
+    }
+
+    .img {
+        width: 45px;
+    }
+
+    .navbar h1{
+        font-size: 22px;
+    }
+    
+    .navbar-sign {
+        width: 150px;
+        font-size: 15px;
+    }
+
+    .navbar-sign button{
+    font-size: 9px;
+    padding: 5px;
+    height: 45px;
+    }
+
+}

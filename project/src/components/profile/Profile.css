@@ -1,0 +1,98 @@
+.general_profile {
+    width: 100%;
+    display: block;
+    height: 700px;
+    border-width: 5px;
+    border-color: rgb(212, 65, 1);
+    border-style: solid;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.profile_page {
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 180px;
+    margin-right: 180px;
+    border-width: 5px;
+    border-color: rgb(205, 50, 195);
+    border-style: solid;
+
+}
+
+.general_info {
+    height: 400px;
+    width: 100%;
+    border-width: 5px;
+    border-color: rgb(50, 112, 205);
+    border-style: solid;
+    background-color: white;
+}
+
+.video_background {
+    height: 65%;
+    object-fit: contain;
+    border-width: 5px;
+    border-color: yellowgreen;
+    border-style: solid;
+    overflow: hidden;
+    
+}
+
+.video {
+width: 120%;
+}
+
+.img_profile {
+    height: 20px;
+    align-items: center;
+    display: flex;
+}
+
+.img_P {
+    width: 180px;
+    margin-left: 80px;
+    margin-bottom: 30px;
+    border-radius: 110px;
+    border-style: solid;
+    border-width: 8px;
+    border-color: rgb(50, 135, 205);
+    cursor: pointer;
+}
+
+.informations {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    position: relative;
+    left: 300px;
+}
+
+.NGA {
+    display: inline-block;
+    width: 300px;
+}
+
+.NGA h1 {
+    font-weight: 1000;
+    font-size: 35px;
+}
+
+.name {
+    display: block;
+    margin-top: 10px;
+    font-size: 20px;
+    color: rgb(50, 135, 205);
+    font-weight: 600;    
+}
+
+.CS {
+    display: inline-block;
+    width: 200px;
+    position: relative;
+    right: 0px;
+   
+}

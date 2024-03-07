@@ -1,0 +1,140 @@
+.SearchBar {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    background-color: rgb(255, 255, 255);
+    border-bottom: solid;
+    border-color: rgb(185, 185, 185);
+    border-width: 2px;
+    color: black;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.SearchS {
+    display: inline-block;
+    background-color: rgb(230, 230, 230);
+    padding-left: 15px;
+    height: 30px;
+    width: 270px;
+    border-radius: 8px;
+    border-style: none;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.SearchN {
+    display: inline-block;
+    background-color: rgb(230, 230, 230);
+    padding-left: 15px;
+    height: 30px;
+    width: 270px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    border-style: none;
+    cursor: pointer;
+}
+
+.SearchY {
+    display: inline-block;
+    background-color: rgb(230, 230, 230);
+    padding-left: 15px;
+    height: 30px;
+    width: 270px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    border-style:none;
+    cursor: pointer;
+}
+
+.butt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 150px;
+}
+
+.h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.h1:hover {
+    background-color: rgb(232, 232, 232);
+}
+
+.h1:active {
+    background-color: rgb(216, 216, 216);
+}
+
+.h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    transition: 0.2s;
+}
+
+.h2:hover {
+    background-color: rgb(232, 232, 232);
+}
+
+.h2:active {
+    background-color: rgb(216, 216, 216);
+}
+
+@media screen and (max-width: 790px) {
+    .SearchN, .SearchS, .SearchY {
+        padding-left: 8px;
+        height: 30px;
+  
+        font-size: 12px;
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+.SearchN, .SearchS, .SearchY {
+    padding-left: 8px;
+    height: 30px;
+    width: 150px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.butt {
+    width: 80px;
+}
+.h1, .h2 {
+    font-size: 20px;
+}
+}
+@media screen and (max-width: 550px) {
+    .SearchN, .SearchS, .SearchY {
+        width: 110px;
+    }
+
+    .butt {
+        width: 40px;
+    }
+    .h1, .h2 {
+        font-size: 15px;
+    }
+}
+

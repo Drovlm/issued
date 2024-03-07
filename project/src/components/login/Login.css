@@ -1,0 +1,103 @@
+.auth-form {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .auth-form, .login-form {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
+  }
+  
+  .text-danger {
+    justify-content: space-between;
+    color: red;
+    background-color: rgb(255, 211, 211);
+    width: 100%;
+    text-align: start;
+    font-size: 15px;
+    padding: 2px;
+  }
+
+  .authFL {
+    background-color: rgb(232, 232, 232);
+    border-radius: 5px;
+    width: 500px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .closeIcon {
+    width: 100%;
+    align-items: end;
+    text-align: end;
+    height: 30px;
+    
+  }
+
+  .close {
+    font-size: 25px;
+    display: block; 
+
+  }
+
+  .close:hover {
+    font-size: 28px;
+    color: #ffb700;
+  }
+
+  .authFL h1{
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: black;
+  }
+
+  .login-form {
+    width: 100%;
+  }
+
+  label {
+    width: 100%;
+    color: black;
+    text-align: start;
+    padding-top: 15px ;
+  }
+  
+  input {
+    margin: 0.2rem 0;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .auth .inpit:focus{
+    background-color: rgb(203, 224, 252);
+  }
+
+  .auth-form button {
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .authF .reglink {
+    background:none;
+    color: rgb(70, 69, 69);
+  }
+
+  .authF .reglink:hover {
+  text-decoration: underline;
+  }
