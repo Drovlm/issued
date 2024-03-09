@@ -32,6 +32,7 @@ const LogIn = ({ onClose, onLoginSuccess }) => {
         if (res.data.message === 'Login Successfully') {
           console.log('Login Successfully');
           console.log('Username:', res.data.name);
+          console.log('Image:', res.data.img);
           onLoginSuccess(res.data.name);
         } else {
           console.log('Failed');

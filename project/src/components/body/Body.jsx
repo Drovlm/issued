@@ -11,66 +11,90 @@ import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
 import SearchMenu from '../SearchMenu/SearchMenu';
 
 const Body = ({ Search = {} }) => {
+  const { users, req, selectedInstitute, selectedSpecialist, loadUsers, selectInstetut, selectSpecialist, } = SearchMenu();
   const [data, setData] = useState([]);
-  const [records, setRecords] = useState ([]);
+  const [records, setRecords] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-
+  /*const [ setSelectedInstitute] = useState('');*/
+  /*const [setSelectedSpecialist] = useState('');*/
+  const [images, setImages] = useState([]);
+  const onClose = () => {
+    setMenuOpen(false);
+  }
+    <Body onClose={onClose} />
+    
   useEffect(() => {
     fetch('http://localhost:3000/project/src/API.php')
       .then(res => res.json())
       .then(data => {
         setData(data);
         setRecords(data);
+        setImages(data); 
       })
-      .catch(err => console.log(err));
+      .catch(error => console.error('Error fetching images:', error));
   }, []);
-  const filter = () => {
+
+const filter = () => {
     setRecords(
       data.filter(
         (f) =>
-          f.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (f.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           f.last.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          f.issuey.toLowerCase().includes(searchQuery.toLowerCase())
+          f.issuey.toString().includes(searchQuery.toString())) &&
+          (selectedInstitute ? f.institute === selectedInstitute : true) &&
+          (selectedSpecialist ? f.specialist === selectedSpecialist : true)
       )
     );
   };
 
-  {/*FOR REAL TIME SEARCH */}
-  {/*const filter = (event) => {
-setRecords(data.filter(f => f.name.toLowerCase().includes(event.target.value)))
-setRecords(data.filter(f => f.last.toLowerCase().includes(event.target.value)))
-setRecords(data.filter(f => f.issuey.toLowerCase().includes(event.target.value)))
-} */}
+    {/*FOR REAL TIME SEARCH */}
+      {/*const filter = (event) => {
+      setRecords(data.filter(f => f.name.toLowerCase().includes(event.target.value)))
+      setRecords(data.filter(f => f.last.toLowerCase().includes(event.target.value)))
+        setRecords(data.filter(f => f.issuey.toLowerCase().includes(event.target.value)))
+        setRecords(data.filter(f =>  selectedInstitute ? f.institute === selectedInstitute : true)) &&
+        setRecords(data.filter(f =>  selectedSpecialist ? f.specialist === selectedSpecialist : true))
+        }
 
   const [search, setSearch] = useState({
     last: '',
     name: '',
     issuey: '',
-  });
+    institute:'',
+    specialist:'',
+  })*/}
 
-  console.log('Search state:', search); 
-    const [MSearch, setMenuOpen] = useState(false);
-    const MenuOpen = () => {
-    setMenuOpen(false);
-    }
+  const onSearch = (searchCriteria) => {
+    setRecords(
+      data.filter(
+        (f) =>
+          (searchCriteria.last ? f.last.toLowerCase().includes(searchCriteria.last.toLowerCase()) : true) &&
+          (searchCriteria.name ? f.name.toLowerCase().includes(searchCriteria.name.toLowerCase()) : true) &&
+          (searchCriteria.issuey ? f.issuey.toString().includes(searchCriteria.issuey.toString()) : true) &&
+          (selectedInstitute ? f.institute === selectedInstitute : true) &&
+          (selectedSpecialist ? f.specialist === selectedSpecialist : true)
+      )
+    );
+  };
+
+
+  const [isMenuOpen, setMenuOpen] = useState(false); 
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  }
 
   return ( 
     <div className="body">
-          <div>
+      <div className="SearchBar">
+
             {/*SEARCH BY CLICKING on "faSearch" ICON*/}
-<div className="SearchBar">
-<input className="SearchS" type="text" placeholder="Фамилия"
-onChange={(e) => setSearchQuery(e.target.value)}/>
+       <input className="SearchS" type="text" placeholder="Фамилия" onChange={(e) => setSearchQuery(e.target.value)}/>
+        <input className="SearchN" type="text" placeholder="Имя" onChange={(e) => setSearchQuery(e.target.value)} />
+        <input className="SearchN" type="number" placeholder="Год выпуска" onChange={(e) => setSearchQuery(e.target.value)} />
+       
 
-<input className="SearchN" type="text" placeholder="Имя"
-  onChange={(e) => setSearchQuery(e.target.value)} />
-
-<input className="SearchN" type="number" placeholder="Год выпуска"
-  onChange={(e) => setSearchQuery(e.target.value)} />
-
-
-  {/* REAL TI<E SEARCH */}
-{/*<input className="SearchS" type="text" placeholder="Фамилия" onChange={(e) => {
+              {/* REAL TI<E SEARCH */}
+ {/*<input className="SearchS" type="text" placeholder="Фамилия" onChange={(e) => {
   setSearch({ ...search, last: e.target.value });
   setRecords(data.filter(f => f.last.toLowerCase().includes(e.target.value.toLowerCase())));
 }} />
@@ -81,85 +105,110 @@ onChange={(e) => setSearchQuery(e.target.value)}/>
 <input className="SearchN" type="number" placeholder="Год выпуска" onChange={(e) => {
   setSearch({ ...search, issuey: e.target.value });
   setRecords(data.filter(f => f.issuey.toLowerCase().includes(e.target.value.toLowerCase())));
-}} />*/}
+}} /> */}
 
-<div className="butt">
-<div className="h1" onClick={filter}> <FontAwesomeIcon icon={faSearch} /></div>
-<div onClick={() => setMenuOpen(true)} className="h2"><FontAwesomeIcon icon={faFilter} /></div>
-{MSearch &&
-      <SearchMenu onClose={MenuOpen}>
 
-      </SearchMenu>
-      }
+        <div className="butt">
+          <div className="h1" onClick={filter}> <FontAwesomeIcon icon={faSearch} /></div>
+          <div onClick={toggleMenu} className="h2"><FontAwesomeIcon icon={faFilter} /></div>
+        </div>
     
-</div>
-</div>
-</div>
+        {isMenuOpen && (
+          <div className='OfMenu'>
+      <div className="menu">
+        <div className="CloseIcon">
+        <p className="Close" onClick={onClose}>×</p>
+        </div>
+        
+        <div className="container">
+
+        <h1>Институт</h1>
+       <div>
+       <select name="after_field" onChange={selectInstetut}>
+       <option value="">Выберите институт</option>
+            {users.map((user, index) => (
+              <option value={user.id}>{user.Institutes}</option>
+            ))}
+          </select>
+       </div>
+
+       <div class="col-sm-3">
+       <h1>Специальность</h1>
+        <select onChange={selectSpecialist} name="Specialist">
+        <option value="">Выберите специалиста</option>
+          {req && req.length>0 && req.map((user, index) => (
+              <option value={user.id}>{user.Specialist}</option>
+              
+            ))}
+         </select>
+      </div>
+</div>   
+
+        <div className="gro">
+          <h1>Год выпуска</h1>
+          <input className='text_y' type="number"></input>
+        </div>
+        <div className='BlockSBTN'>
+          <button onClick={() => { filter(); onClose(); }} className='searchBTN'>Применить фильтры</button>
+        </div>
+      </div>
+    </div>
+        )}
+
+      </div>
       <div className="Cards">
-
-      {records
-  .filter((item) =>
-    (Search.last ? item.last.toLowerCase().includes(Search.last.toLowerCase()) : true) &&
-    (Search.name ? item.name.toLowerCase().includes(Search.name.toLowerCase()) : true) &&
-    (Search.issuey ? item.issuey.toString().includes(Search.issuey.toString()) : true)
-  )
-  .map((item) => (
-            <div className="offic_info" key={item.id}>
-
+        {records.map((item) => (
+          <div className="offic_info" key={item.id}>
             <div className="CoverP">
-              <img className='imgP' src={img} alt="img" />
+              <img className='imgP' src={item.img ? `http://localhost:3000/project/src/API.php/uploads/${item.img}` : img}  />
             </div>
             <div className="Pro">
-
-            <p>{item.img}</p>
-            <p className="Full_name" style={{fontSize:'25px', fontWeight:'700'}}>{item.last} {item.name} {item.father}</p>
-
-                <div className="compl_info">
-              <div className="stable_info">
-                <h4>Дата рождение:</h4>
-                <h4>Институт:</h4>
-                <h4>Специальность:</h4>
-                <h4>Год выпуска:</h4>
-              </div>
-           
-                  <div className="change_info"> 
+              <p>{item.img}</p>
+              <p className="Full_name" style={{fontSize:'25px', fontWeight:'700'}}>{item.last} {item.name} {item.father}</p>
+              <div className="compl_info">
+                <div className="stable_info">
+                  <h4>Дата рождение:</h4>
+                  <h4>Институт:</h4>
+                  <h4>Специальность:</h4>
+                  <h4>Год выпуска:</h4>
+                </div>
+                <div className="change_info"> 
                   <h4>{item.date}</h4>
                   <h4>{item.institute}</h4>
                   <h4>{item.specialist}</h4>
                   <h4>{item.issuey}</h4>
                 </div>
-                </div>
-
-                <div className="social_info">
-                  {item.vkLink ? (
+              </div>
+              <div className="social_info">
+                {item.vkLink ? (
                   <a  style={{color:'rgb(76, 117, 163)'}} href={item.vkLink} target="_blank" rel="noopener noreferrer">
-                  <SlSocialVkontakte />
-                </a>
-                  ) : (
-                  <p>{item.vkLink}</p>
-                  )}
-                  {item.telegramLink ? (
-                  <a style={{ color:'white'}} href={item.telegramLink} target="_blank" rel="noopener noreferrer">
-                  <FaTelegramPlane />
+                    <SlSocialVkontakte />
                   </a>
-                  ) : (
+                ) : (
+                  <p>{item.vkLink}</p>
+                )}
+                {item.telegramLink ? (
+                  <a style={{ color:'white'}} href={item.telegramLink} target="_blank" rel="noopener noreferrer">
+                    <FaTelegramPlane />
+                  </a>
+                ) : (
                   <p>{item.telegramLink}</p>
-                  )}
-                  {item.instagramLink ? (
+                )}
+                {item.instagramLink ? (
                   <a style={{color:'rgb(228, 64, 95)'}} href={item.instagramLink} target="_blank" rel="noopener noreferrer">
-                  <IoLogoInstagram />
-                </a>
-                  ) : (
+                    <IoLogoInstagram />
+                  </a>
+                ) : (
                   <p>{item.instagramLink}</p>
-                  )}
-                  {item.facebookLink ? (
+                )}
+                {item.facebookLink ? (
                   <a style={{color:'rgb(0, 128, 255)'}} href={item.facebookLink} target="_blank" rel="noopener noreferrer">
-                  <TiSocialFacebook  />
-                </a>
-                  ) : (
+                    <TiSocialFacebook  />
+                  </a>
+                ) : (
                   <p>{item.facebookLink}</p>
-                  )}
-                </div>
+                )}
+              </div>
             </div>
           </div>
         ))}

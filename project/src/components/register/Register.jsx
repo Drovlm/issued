@@ -212,7 +212,6 @@ function handleIChange(event) {
             ))}
             </select>
                
-               
                <div style={{textAlign:'start'}}>
                <label htmlFor="specialist"><strong>Специальность</strong><p style={{color:'red'}}>*</p></label>
                {errors.specialist && <span className='text-dangerr'> {errors.specialist} </span>}
