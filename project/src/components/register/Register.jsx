@@ -237,7 +237,7 @@ function handleIChange(event) {
          <main className="main">
           <div className="photoupl">
             <div className="minform" action="" onClick={() => document.querySelector(".input-filed").click()}>
-                <input type="file" accept="image/*" className="input-filed" hidden
+                <input  htmlFor="img" id="img" type="file" accept="image/*" className="input-filed" hidden
                   onChange={({ target: { files } }) => {
                   files[0] && setFileName(files[0].name);
                     if (files) {
