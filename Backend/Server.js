@@ -41,25 +41,27 @@ const db = mysql.createConnection({
   });
   
 
-app.post('/login', (req, res) => {
-  console.log(req.body);
-  const selectSql = "SELECT name, img FROM login WHERE email = ? AND password = ?";
-    
-  db.query(selectSql, [req.body.email, req.body.password], (err, selectResult) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error' });
-    }
-
-    if (selectResult.length > 0) {
-      const { name, img } = selectResult[0]; 
-      return res.status(200).json({ message: 'Login Successfully', name, img });
-    } else {
-      return res.status(200).json({ message: 'Failed' });
-    }
+  app.post('/login', (req, res) => {
+    console.log(req.body);
+    const selectSql = "SELECT id, name, img FROM login WHERE email = ? AND password = ?";
+      
+    db.query(selectSql, [req.body.email, req.body.password], (err, selectResult) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error' });
+      }
+  
+      if (selectResult.length > 0) {
+        const { id, name, img } = selectResult[0]; 
+        console.log("User ID:", id); 
+        return res.status(200).json({ message: 'Login Successfully', name, img });
+      } else {
+        return res.status(200).json({ message: 'Failed' });
+      }
+    });
   });
-});
+  
 
-app.get('login', (req, res) => {
+app.get('/login', (req, res) => {
   const selectSql = "SELECT name,img FROM login WHERE name = ? AND img = ?";
 
   db.query(selectSql, [req.query.email], (err, selectResult) => {
@@ -68,13 +70,27 @@ app.get('login', (req, res) => {
     }
     
     if (selectResult.length > 0) {
-      const userProfile = selectResult[0]; // Assuming the query returns only one row
+      const userProfile = selectResult[0];
       return res.status(200).json(userProfile);
     } else {
       return res.status(404).json({ error: 'User not found' });
     }
   });
 });
+
+app.post('/add-story', (req, res) => {
+  const { id, story_img } = req.body;
+  console.log("User ID:", id);
+  const insertSql = "INSERT INTO story (id, story_img) VALUES (?, ?)";
+  db.query(insertSql, [id, story_img], (err, result) => {
+    if (err) {
+      console.error("Error inserting story into database:", err);
+      return res.status(500).json({ error: 'Error inserting story into database' });
+    }
+    return res.status(200).json({ message: 'Story added successfully' });
+  });
+});
+
 
 app.listen(8081, () => {
     console.log("listening");

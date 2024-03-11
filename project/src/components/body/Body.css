@@ -13,7 +13,7 @@
     row-gap: 120px;
     padding: 50px;
     padding-top: 100px;
-    grid-template-rows:  1fr 1fr 1fr;
+    grid-template-rows:  auto;
 } 
 
 .offic_info {
