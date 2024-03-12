@@ -86,7 +86,7 @@ const handleSubmit = (event) => {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:3000/project/src/Inst.php");
+    const result = await axios.get("http://localhost:3000/project/src/Admin/Inst.php");
     setUsers(result.data.reverse());
   };
 
@@ -96,7 +96,7 @@ const handleSubmit = (event) => {
     req[name] = value;
     var data = value;
 
-    var response = fetch("http://localhost:3000/project/src/Specialist.php", {
+    var response = fetch("http://localhost:3000/project/src/Admin/Specialist.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

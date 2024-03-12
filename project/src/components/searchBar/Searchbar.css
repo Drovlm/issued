@@ -1,5 +1,8 @@
 .SearchBar {
     display:flex;
+    position: fixed;
+    z-index: 55;
+    width: 100%;
     justify-content: space-around;
     align-items: center;
     height: 60px;

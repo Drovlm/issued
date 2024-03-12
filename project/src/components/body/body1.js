@@ -10,7 +10,7 @@ const Body = ({ Search = {} }) => {
   const [item, setItem] = useState([]);
 <Body Search={Search} />
   useEffect(() => {
-    fetch('http://localhost:3000/project/src/API.php')
+    fetch('http://localhost:3000/project/src/Admin/API.php')
       .then(res => res.json())
       .then(result => {
         //console.log('Fetched data:', result); // Log fetched data

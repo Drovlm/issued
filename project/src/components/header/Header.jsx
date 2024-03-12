@@ -8,6 +8,7 @@ import img from '../../Img/blank-profile-picture.jpg';
 import { TiThMenu } from "react-icons/ti";
 import { MdDelete } from 'react-icons/md';
 import { FiFilePlus } from "react-icons/fi";
+import { RiCloseLine } from "react-icons/ri";
 import axios from 'axios';
 
 const Header = () => {
@@ -22,6 +23,7 @@ const Header = () => {
 
   const onClose = () => {
     setStoryPOpen(false);
+    setMenuOpen(false);
   };
 
   const handleModalOpen = () => {
@@ -40,11 +42,11 @@ const Header = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUserInfo({ name: '', img: '', id:'' });
+    setUserInfo({ name:'',  img: '', id:'' });
   };
 
   useEffect(() => {
-    fetch('http://localhost:3000/project/src/API.php')
+    fetch('http://localhost:3000/project/src/Admin/API.php')
       .then(res => res.json())
       .then(data => {
         setRecords(data);
@@ -60,19 +62,27 @@ const Header = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("User ID:", userInfo.id);
+    console.log("Story text:", story);
+  
     const formData = new FormData();
-    formData.append('id', userInfo.id); 
-    formData.append('story_img', story);
-    
-    axios.post('http://localhost:8081/add-story', formData)
+    formData.append('user_id', userInfo.id); // Corrected to user_id
+    formData.append('story_text', story);
+  
+    axios.post('http://localhost:8081/story', formData)
       .then((res) => {
+        console.log('Response:', res.data);
         alert('Story added successfully.');
-        setStory('');
       })
       .catch((err) => {
+        console.error('Error:', err);
         alert('Error: Unable to add story. Please try again.');
-        console.error(err);
       });
+  }
+  
+  const [isMenuOpen, setMenuOpen] = useState(false); 
+  const handleMenuClick = () => {
+    setMenuOpen(!isMenuOpen);
   }
 
   return (
@@ -98,7 +108,70 @@ const Header = () => {
       <div className="CloseBTN">
         <p className="CloseX" onClick={onClose}>×</p>
       </div>
+
       <form onSubmit={handleSubmit}>
+  <div className="StoryImage" action="" >
+  <input  htmlFor="story_text" name='story_text' id="story_text" type="text" value={story} onChange={(e) => setStory(e.target.value)} />
+
+  </div>
+  <div className="optinsSTY">
+    <div className="trashSTY">
+      <MdDelete style={{ marginTop: '4px' }} onClick={() => { setImage(null); }} />
+    </div>
+  </div>
+  <div className="authSTY">
+    <button className="ShareBTn" type="submit">Опубликовать</button>
+  </div>
+</form>
+
+    </div>
+  </div>
+)}
+<div className='menuOption'>
+  <div className="Option" id="menuIcon">
+    <TiThMenu onClick={handleMenuClick} />
+  </div>
+</div>
+
+{isMenuOpen && (
+  
+<div className='rightbar' id="myRightBar">
+<div className="info">
+<h className="username">{userInfo.last}</h>
+              <h className="username">{userInfo.name}</h>
+        
+            </div>
+
+  <div className='logoutDiv'>
+  <button className="logoutBTN" onClick={handleLogout}>Выйти</button>
+  </div>
+</div>)}
+          </>
+        ) : (
+          <>
+            <p onClick={handleModalOpen}>
+              {userInfo.name ? ` ${userInfo.name}` : 'Войти'}
+            </p>
+            <button className="regBTN" onClick={handleRegOpen}>Зарегистрироваться</button>
+          </>
+        )}
+        {modalOpen && (
+          <LogIn
+            onClose={() => setModalOpen(false)}
+            onLoginSuccess={handleLoginSuccess}
+          />
+        )}
+        {regOpen && <Register onClose={() => setRegOpen(false)} />}
+      </div>
+    </div>
+  );
+};
+
+export default Header;
+
+
+{/*
+<form onSubmit={handleSubmit}>
         <div className="StoryImage" action="" onClick={() => document.querySelector(".input-filed").click()}>
           <input htmlFor="sty" id="sty" type="file" accept="image/*" className="input-filed" hidden
             onChange={({ target: { files } }) => {
@@ -122,34 +195,4 @@ const Header = () => {
           <button className="ShareBTn" type="submit">Опубликовать</button>
         </div>
       </form>
-    </div>
-  </div>
-)}
-
-            <div className='menuOption'>
-              <div className="Option"><TiThMenu /></div>
-            </div>
-
-            <button className="logoutBTN" onClick={handleLogout}>Выйти</button>
-          </>
-        ) : (
-          <>
-            <p onClick={handleModalOpen}>
-              {userInfo.name ? ` ${userInfo.name}` : 'Войти'}
-            </p>
-            <button className="regBTN" onClick={handleRegOpen}>Зарегистрироваться</button>
-          </>
-        )}
-        {modalOpen && (
-          <LogIn
-            onClose={() => setModalOpen(false)}
-            onLoginSuccess={handleLoginSuccess}
-          />
-        )}
-        {regOpen && <Register onClose={() => setRegOpen(false)} />}
-      </div>
-    </div>
-  );
-};
-
-export default Header;
+*/}

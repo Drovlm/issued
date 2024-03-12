@@ -2,8 +2,11 @@ p{
     font-family: Roboto, Arial;
     margin-top: 0;
     margin-bottom: 0;
+    scroll-behavior: smooth;
 }
 body{
     margin: 0;
     background-color: rgb(215, 215, 215);
+    scroll-behavior: smooth;
 }
+

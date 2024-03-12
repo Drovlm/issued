@@ -1,4 +1,6 @@
 .body {
+    position: relative;
+    top: 90px;
     display: block;
     align-items: center;
     width: 100%;
@@ -12,7 +14,7 @@
     column-gap: 12px;
     row-gap: 120px;
     padding: 50px;
-    padding-top: 100px;
+    padding-top: 150px;
     grid-template-rows:  auto;
 } 
 

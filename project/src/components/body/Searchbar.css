@@ -2,14 +2,15 @@
     display:flex;
     justify-content: space-around;
     align-items: center;
-    height: 60px;
+    height: 50px;
     background-color: rgb(255, 255, 255);
     border-bottom: solid;
     border-color: rgb(185, 185, 185);
     border-width: 2px;
     color: black;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    padding-top: 5px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .SearchS {
@@ -55,8 +56,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    height: 50px;
     width: 150px;
+    margin-bottom: 5px;
 }
 
 .h1 {

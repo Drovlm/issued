@@ -1,5 +1,8 @@
 .header {
     display:flex;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
     height: 90px;
     justify-content: space-between;
     align-items: center;
@@ -131,6 +134,48 @@
     font-size: 28px;
     margin: auto;
     padding-top: 8px;
+}
+
+.rightbar {
+    position: fixed;
+    top: 90px;
+    right: 0px;
+    bottom: 0px;
+    width: 280px;
+    background-color: rgb(178, 220, 50);
+    z-index: 2;
+}
+
+.info {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    color: black;
+    background-color: #d1a537;
+}
+
+.logoutDiv {
+    width: 100%;
+    position: fixed;
+    bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.logoutBTN {
+    background-color:#ffb700 ;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: 0.3s;
 }
 
 @media screen and (max-width: 785px) {

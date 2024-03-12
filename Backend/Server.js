@@ -78,11 +78,12 @@ app.get('/login', (req, res) => {
   });
 });
 
-app.post('/add-story', (req, res) => {
-  const { id, story_img } = req.body;
+app.post('/story', (req, res) => {
+  const { id, story_text } = req.body;
   console.log("User ID:", id);
-  const insertSql = "INSERT INTO story (id, story_img) VALUES (?, ?)";
-  db.query(insertSql, [id, story_img], (err, result) => {
+  console.log("Story:", story_text); 
+  const insertSql = "INSERT INTO story (id, story_text) VALUES (?, ?)";
+  db.query(insertSql, [id, story_text], (err, result) => {
     if (err) {
       console.error("Error inserting story into database:", err);
       return res.status(500).json({ error: 'Error inserting story into database' });

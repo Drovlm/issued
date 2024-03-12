@@ -24,7 +24,7 @@ const Body = ({ Search = {} }) => {
     <Body onClose={onClose} />
     
   useEffect(() => {
-    fetch('http://localhost:3000/project/src/API.php')
+    fetch('http://localhost:3000/project/src/Admin/API.php')
       .then(res => res.json())
       .then(data => {
         setData(data);
