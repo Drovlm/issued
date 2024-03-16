@@ -8,6 +8,7 @@ import img from '../../Img/blank-profile-picture.jpg';
 import { TiThMenu } from "react-icons/ti";
 import { MdDelete } from 'react-icons/md';
 import { FiFilePlus } from "react-icons/fi";
+import { LuLogOut } from "react-icons/lu";
 import { RiCloseLine } from "react-icons/ri";
 import axios from 'axios';
 
@@ -109,43 +110,45 @@ const Header = () => {
         <p className="CloseX" onClick={onClose}>×</p>
       </div>
 
-      <form onSubmit={handleSubmit}>
-  <div className="StoryImage" action="" >
-  <input  htmlFor="story_text" name='story_text' id="story_text" type="text" value={story} onChange={(e) => setStory(e.target.value)} />
 
-  </div>
-  <div className="optinsSTY">
-    <div className="trashSTY">
-      <MdDelete style={{ marginTop: '4px' }} onClick={() => { setImage(null); }} />
-    </div>
-  </div>
-  <div className="authSTY">
-    <button className="ShareBTn" type="submit">Опубликовать</button>
-  </div>
-</form>
+      <form onSubmit={handleSubmit}>
+        <div className="StoryImage" action="" onClick={() => document.querySelector(".input-filed").click()}>
+          <input htmlFor="sty" id="sty" type="file" accept="image/*" className="input-filed" hidden
+            onChange={({ target: { files } }) => {
+              if (files) {
+                setImage(URL.createObjectURL(files[0]));
+              } }}/>
+          {image ? (
+            <img className="imgSTY" src={image} />
+          ) : (
+            <>
+              <FiFilePlus color="#1475cf" size={120} />
+            </>
+          )}
+        </div>
+        <input  htmlFor="story_text" name='story_text' id="story_text" type="text" value={story} onChange={(e) => setStory(e.target.value)} />
+
+        <div className="optinsSTY">
+          <div className="trashSTY">
+            <MdDelete style={{ marginTop: '4px' }} onClick={() => { setImage(null); }} />
+          </div>
+        </div>
+       
+        <div className="authSTY">
+          <button className="ShareBTn" type="submit">Опубликовать</button>
+        </div>
+      </form>
+
 
     </div>
   </div>
 )}
-<div className='menuOption'>
-  <div className="Option" id="menuIcon">
-    <TiThMenu onClick={handleMenuClick} />
-  </div>
+<div className="logoutBTN">
+<LuLogOut  onClick={handleLogout} />
+
 </div>
 
-{isMenuOpen && (
-  
-<div className='rightbar' id="myRightBar">
-<div className="info">
-<h className="username">{userInfo.last}</h>
-              <h className="username">{userInfo.name}</h>
-        
-            </div>
 
-  <div className='logoutDiv'>
-  <button className="logoutBTN" onClick={handleLogout}>Выйти</button>
-  </div>
-</div>)}
           </>
         ) : (
           <>
