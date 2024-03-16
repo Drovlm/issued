@@ -10,7 +10,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "register"
+    database: "register"  
   });
 
   app.post('/register', (req, res) => {

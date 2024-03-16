@@ -50,11 +50,19 @@ const Header = () => {
     fetch('http://localhost:3000/project/src/Admin/API.php')
       .then(res => res.json())
       .then(data => {
-        setRecords(data);
-        setImages(data);
+        const decodedData = data.map(item => {
+          const decodedImgUrl = atob(item.img);
+          const formattedImgUrl = `http://localhost:3000/project/src/API.php/uploads/${decodedImgUrl}`;
+          console.log('Decoded image URL:', formattedImgUrl);
+          return { ...item, img: formattedImgUrl };
+        });
+        setRecords(decodedData);
+        setImages(decodedData);
       })
       .catch(error => console.error('Error fetching images:', error));
   }, []);
+  
+  
 
   const [isStoryPOpen, setStoryPOpen] = useState(false);
   const toggleMenu = () => {
@@ -67,7 +75,7 @@ const Header = () => {
     console.log("Story text:", story);
   
     const formData = new FormData();
-    formData.append('user_id', userInfo.id); // Corrected to user_id
+    formData.append('user_id', userInfo.id);
     formData.append('story_text', story);
   
     axios.post('http://localhost:8081/story', formData)

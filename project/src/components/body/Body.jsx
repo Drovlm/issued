@@ -23,16 +23,34 @@ const Body = ({ Search = {} }) => {
   }
     <Body onClose={onClose} />
     
-  useEffect(() => {
+ useEffect(() => {
+    fetch('http://localhost:3000/project/src/Admin/ImgApi.php')
+      .then(res => res.json())
+      .then(data => {
+        setImages(data); 
+      })
+      .catch(error => console.error('Error fetching images:', error));
+  }, []);
+
+
+useEffect(() => {
     fetch('http://localhost:3000/project/src/Admin/API.php')
       .then(res => res.json())
       .then(data => {
         setData(data);
         setRecords(data);
-        setImages(data); 
+        // Decode base64-encoded image data
+        data.forEach(item => {
+          if (item.img) {
+            const decodedImageData = atob(item.img);
+            item.img = decodedImageData;
+          }
+        });
+        setImages(data);
       })
       .catch(error => console.error('Error fetching images:', error));
-  }, []);
+  }, []); 
+
 
 const filter = () => {
     setRecords(
@@ -160,10 +178,13 @@ const filter = () => {
         {records.map((item) => (
           <div className="offic_info" key={item.id}>
             <div className="CoverP">
-              <img className='imgP' src={item.img ? `http://localhost:3000/project/src/API.php/uploads/${item.img}` : img}  />
+              <img className='imgP' src={item.img ? `http://localhost:3000/project/src/Admin/ImgApi.php` : img}  /> 
+
+             
+
+              {/*<img className='imgP' src={item.img ? `data:image/jpeg;base64,${item.img}` : img} />*/}
             </div>
             <div className="Pro">
-              <p>{item.img}</p>
               <p className="Full_name" style={{fontSize:'25px', fontWeight:'700'}}>{item.last} {item.name} {item.father}</p>
               <div className="compl_info">
                 <div className="stable_info">
