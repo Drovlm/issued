@@ -24,7 +24,7 @@ const Body = ({ Search = {} }) => {
     <Body onClose={onClose} />
     
  useEffect(() => {
-    fetch('http://localhost:3000/project/src/Admin/ImgApi.php')
+    fetch('http://localhost:3000/project/src/Admn/ImgApi.php')
       .then(res => res.json())
       .then(data => {
         setImages(data); 

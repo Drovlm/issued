@@ -46,7 +46,9 @@
 }
 
 .imgP {
+    object-fit: cover;
     width: 180px;
+    height: 180px;
     border-radius: 90px;
     margin-bottom: 50px;
     border-style: solid;
