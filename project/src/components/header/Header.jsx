@@ -52,7 +52,7 @@ const Header = () => {
       .then(data => {
         const decodedData = data.map(item => {
           const decodedImgUrl = atob(item.img);
-          const formattedImgUrl = `http://localhost:3000/project/src/API.php/uploads/${decodedImgUrl}`;
+          const formattedImgUrl = `http://localhost:3000/project/src/Admin/API.php/uploads/${decodedImgUrl}`;
           console.log('Decoded image URL:', formattedImgUrl);
           return { ...item, img: formattedImgUrl };
         });

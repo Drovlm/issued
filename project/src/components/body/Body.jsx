@@ -21,17 +21,23 @@ const Body = ({ Search = {} }) => {
   const onClose = () => {
     setMenuOpen(false);
   }
-    <Body onClose={onClose} />
     
  useEffect(() => {
-    fetch('http://localhost:3000/project/src/Admn/ImgApi.php')
-      .then(res => res.json())
-      .then(data => {
-        setImages(data); 
-      })
-      .catch(error => console.error('Error fetching images:', error));
-  }, []);
-
+    fetch('http://localhost:3000/project/src/Admin/ImgApi.php')
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(item => {
+        if (item.img) {
+          const decodedImageData = atob(item.img);
+          item.img = decodedImageData;
+        }
+      });
+      setImages(data);
+    })
+    .catch(error => {
+      console.error('Error fetching image data:', error);
+    });
+}, []);
 
 useEffect(() => {
     fetch('http://localhost:3000/project/src/Admin/API.php')
@@ -39,7 +45,6 @@ useEffect(() => {
       .then(data => {
         setData(data);
         setRecords(data);
-        // Decode base64-encoded image data
         data.forEach(item => {
           if (item.img) {
             const decodedImageData = atob(item.img);
@@ -155,8 +160,7 @@ const filter = () => {
         <select onChange={selectSpecialist} name="Specialist">
         <option value="">Выберите специалиста</option>
           {req && req.length>0 && req.map((user, index) => (
-              <option value={user.id}>{user.Specialist}</option>
-              
+              <option value={user.id}>{user.Specialist}</option>  
             ))}
          </select>
       </div>
@@ -178,11 +182,11 @@ const filter = () => {
         {records.map((item) => (
           <div className="offic_info" key={item.id}>
             <div className="CoverP">
-              <img className='imgP' src={item.img ? `http://localhost:3000/project/src/Admin/ImgApi.php` : img}  /> 
+            <img className='imgP' src={item.img ? `data:img/jpeg;base64,${item.id}` : img}  alt='User Avatar' />
 
-             
-
-              {/*<img className='imgP' src={item.img ? `data:image/jpeg;base64,${item.img}` : img} />*/}
+            {/*<img className='imgP' src={item.img ? `http://localhost:3000/project/src/Admin/ImgApi.php?id=${item.id}` : img} />*/}
+            
+              {/*<img className='imgP' src={item.img ? `item:image/jpeg;base64,${item.img}` : img} />*/}
             </div>
             <div className="Pro">
               <p className="Full_name" style={{fontSize:'25px', fontWeight:'700'}}>{item.last} {item.name} {item.father}</p>
