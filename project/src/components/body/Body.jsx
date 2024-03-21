@@ -182,7 +182,7 @@ const filter = () => {
         {records.map((item) => (
           <div className="offic_info" key={item.id}>
             <div className="CoverP">
-            <img className='imgP' src={item.img ? `data:img/jpeg;base64,${item.id}` : img}  alt='User Avatar' />
+            <img className='imgP' src={item.img ? `data:img/jpeg;base64,${item.id}` : img}/>
 
             {/*<img className='imgP' src={item.img ? `http://localhost:3000/project/src/Admin/ImgApi.php?id=${item.id}` : img} />*/}
             

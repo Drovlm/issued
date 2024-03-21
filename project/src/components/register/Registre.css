@@ -76,6 +76,7 @@
 
 label {
   text-align: start;
+  font-size: 17px;
   padding-top: 0px;
   color: black;
   width: 95%;
@@ -83,6 +84,7 @@ label {
 
 .text-dangerr {
   color: red;
+  font-size: 13px;
   width: 95%;
   background-color: rgb(255, 211, 211);
   padding: 2px;

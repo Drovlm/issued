@@ -53,7 +53,7 @@ const Header = () => {
         const decodedData = data.map(item => {
           const decodedImgUrl = atob(item.img);
           const formattedImgUrl = `http://localhost:3000/project/src/Admin/API.php/uploads/${decodedImgUrl}`;
-          console.log('Decoded image URL:', formattedImgUrl);
+          {/*console.log('Decoded image URL:', formattedImgUrl);*/}
           return { ...item, img: formattedImgUrl };
         });
         setRecords(decodedData);
@@ -120,32 +120,30 @@ const Header = () => {
 
 
       <form onSubmit={handleSubmit}>
-        <div className="StoryImage" action="" onClick={() => document.querySelector(".input-filed").click()}>
-          <input htmlFor="sty" id="sty" type="file" accept="image/*" className="input-filed" hidden
-            onChange={({ target: { files } }) => {
-              if (files) {
-                setImage(URL.createObjectURL(files[0]));
-              } }}/>
-          {image ? (
-            <img className="imgSTY" src={image} />
-          ) : (
-            <>
+          <div className="StoryImage" action="" onClick={() => document.querySelector(".input-filed").click()}>
+            <input htmlFor="sty" id="sty" type="file" accept="image/*" className="input-filed" hidden
+              onChange={({ target: { files } }) => {
+                if (files) {
+                  setImage(URL.createObjectURL(files[0]));
+                } }}/>
+            {image ? (
+              <img className="imgSTY" src={image} alt="Story Image" />
+            ) : (
               <FiFilePlus color="#1475cf" size={120} />
-            </>
-          )}
-        </div>
-        <input  htmlFor="story_text" name='story_text' id="story_text" type="text" value={story} onChange={(e) => setStory(e.target.value)} />
-
-        <div className="optinsSTY">
-          <div className="trashSTY">
-            <MdDelete style={{ marginTop: '4px' }} onClick={() => { setImage(null); }} />
+            )}
           </div>
-        </div>
-       
-        <div className="authSTY">
-          <button className="ShareBTn" type="submit">Опубликовать</button>
-        </div>
-      </form>
+          <div className='story_text'>
+            <textarea className='story_input' type='text' value={story} onChange={(e) => setStory(e.target.value)}/>
+          </div>
+          <div className="optinsSTY">
+            <div className="trashSTY">
+              <MdDelete style={{ marginTop: '4px' }} onClick={() => { setImage(null); }} />
+            </div>
+          </div>
+          <div className="authSTY">
+            <button className="ShareBTn" type="submit">Опубликовать</button>
+          </div>
+        </form>
 
 
     </div>

@@ -61,7 +61,7 @@ const handleSubmit = (event) => {
     formData.append('institute', values.institute);
     formData.append('specialist', values.specialist);
     formData.append('issuey', values.issuey);
-    formData.append('img', image);
+    
 
   axios.post('http://localhost:8081/register', values)
  
@@ -232,7 +232,6 @@ function handleIChange(event) {
                
                  </div>
         </div>
-
 
          <main className="main">
           <div className="photoupl">
