@@ -56,7 +56,6 @@ useEffect(() => {
       .catch(error => console.error('Error fetching images:', error));
   }, []); 
 
-
 const filter = () => {
     setRecords(
       data.filter(
@@ -183,7 +182,7 @@ const filter = () => {
           <div className="offic_info" key={item.id}>
             <div className="CoverP">
             <img className='imgP' src={item.img ? `data:img/jpeg;base64,${item.id}` : img}/>
-
+            
             {/*<img className='imgP' src={item.img ? `http://localhost:3000/project/src/Admin/ImgApi.php?id=${item.id}` : img} />*/}
             
               {/*<img className='imgP' src={item.img ? `item:image/jpeg;base64,${item.img}` : img} />*/}

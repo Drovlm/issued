@@ -62,7 +62,6 @@ const db = mysql.createConnection({
 
 app.post('/story', (req, res) => {
   console.log(req.body);
-  const selectSql = "SELECT id FROM login";
   const { id, story_text } = req.body;
   console.log("User ID:", id);
   console.log("Story:", story_text); 
@@ -75,6 +74,41 @@ app.post('/story', (req, res) => {
     return res.status(200).json({ message: 'Story added successfully' });
   });
 });
+
+app.get('/story/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const selectSql = "SELECT story_image, story_text FROM story WHERE id = ?";
+  
+  db.query(selectSql, [userId], (err, stories) => {
+      if (err) {
+          console.error("Error fetching stories from database:", err);
+          return res.status(500).json({ error: 'Error fetching stories from database' });
+      }
+      return res.status(200).json({ stories });
+  });
+});
+
+
+{/*
+app.post('/story', (req, res) => {
+  console.log(req.body);
+  const { id, story_text } = req.body;
+
+  // Assuming you have a mechanism to store the user ID in the session or database after a successful login
+  const userID = req.session.userID || req.db.userID;
+
+  console.log("User ID:", userID);
+  console.log("Story:", story_text);
+
+  const insertSql = "INSERT INTO story (id, story_text, user_id) VALUES (?, ?, ?)";
+  db.query(insertSql, [id, story_text, userID], (err, result) => {
+    if (err) {
+      console.error("Error inserting story into database:", err);
+      return res.status(500).json({ error: 'Error inserting story into database' });
+    }
+    return res.status(200).json({ message: 'Story added successfully' });
+  });
+}); */}
 
 
 const PORT = 8081;

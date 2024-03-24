@@ -136,8 +136,8 @@ const Header = () => {
             <textarea className='story_input' type='text' value={story} onChange={(e) => setStory(e.target.value)}/>
           </div>
           <div className="optinsSTY">
-            <div className="trashSTY">
-              <MdDelete style={{ marginTop: '4px' }} onClick={() => { setImage(null); }} />
+            <div className="trashSTY" onClick={() => { setImage(null); }}>
+              <MdDelete style={{ marginTop: '4px' }}  />
             </div>
           </div>
           <div className="authSTY">
@@ -149,8 +149,8 @@ const Header = () => {
     </div>
   </div>
 )}
-<div className="logoutBTN">
-<LuLogOut  onClick={handleLogout} />
+<div className="logoutBTN" onClick={handleLogout}>
+<LuLogOut   />
 
 </div>
 
