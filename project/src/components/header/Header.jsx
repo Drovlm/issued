@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
-import './Story.css';
+import './StoryAdd.css';
 import logo from '../../Img/MIREA_Gerb_Colour.png';
 import LogIn from '../login/LogIn';
 import Register from '../register/Register';
@@ -62,8 +62,6 @@ const Header = () => {
       .catch(error => console.error('Error fetching images:', error));
   }, []);
   
-  
-
   const [isStoryPOpen, setStoryPOpen] = useState(false);
   const toggleMenu = () => {
     setStoryPOpen(!isStoryPOpen);
@@ -71,23 +69,24 @@ const Header = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("User ID:", userInfo.id);
-    console.log("Story text:", story);
-  
-    const formData = new FormData();
-    formData.append('user_id', userInfo.id);
-    formData.append('story_text', story);
-  
-    axios.post('http://localhost:8081/story', formData)
-      .then((res) => {
-        console.log('Response:', res.data);
-        alert('Story added successfully.');
-      })
-      .catch((err) => {
-        console.error('Error:', err);
-        alert('Error: Unable to add story. Please try again.');
-      });
-  }
+
+    const storyData = {
+        story_text: story,
+        story_image: image 
+    };
+
+    axios.post('http://localhost:8081/addStory', storyData)
+        .then((res) => {
+            console.log('Response:', res.data);
+            alert('Story added successfully.');
+            setImage(null);
+            setStory('');
+        })
+        .catch((err) => {
+            console.error('Error:', err);
+            alert('Error: Unable to add story. Please try again.');
+        });
+};
   
   const [isMenuOpen, setMenuOpen] = useState(false); 
   const handleMenuClick = () => {
@@ -120,30 +119,31 @@ const Header = () => {
 
 
       <form onSubmit={handleSubmit}>
-          <div className="StoryImage" action="" onClick={() => document.querySelector(".input-filed").click()}>
-            <input htmlFor="sty" id="sty" type="file" accept="image/*" className="input-filed" hidden
-              onChange={({ target: { files } }) => {
-                if (files) {
-                  setImage(URL.createObjectURL(files[0]));
-                } }}/>
-            {image ? (
-              <img className="imgSTY" src={image} alt="Story Image" />
-            ) : (
-              <FiFilePlus color="#1475cf" size={120} />
-            )}
-          </div>
-          <div className='story_text'>
-            <textarea className='story_input' type='text' value={story} onChange={(e) => setStory(e.target.value)}/>
-          </div>
-          <div className="optinsSTY">
-            <div className="trashSTY" onClick={() => { setImage(null); }}>
-              <MdDelete style={{ marginTop: '4px' }}  />
-            </div>
-          </div>
-          <div className="authSTY">
-            <button className="ShareBTn" type="submit">Опубликовать</button>
-          </div>
-        </form>
+  <div className="StoryImage" action="" onClick={() => document.querySelector(".input-filed").click()}>
+    <input htmlFor="sty" id="sty" type="file" accept="image/*" className="input-filed" hidden
+      onChange={({ target: { files } }) => {
+        if (files) {
+          setImage(URL.createObjectURL(files[0]));
+        } }}/>
+    {image ? (
+      <img className="imgSTY" src={image} alt="Story Image" />
+    ) : (
+      <FiFilePlus color="#1475cf" size={120} />
+    )}
+  </div>
+  <div className='story_text'>
+    <textarea className='story_input' type='text' value={story} onChange={(e) => setStory(e.target.value)}/>
+  </div>
+  <div className="optinsSTY">
+    <div className="trashSTY" onClick={() => { setImage(null); }}>
+      <MdDelete style={{ marginTop: '4px' }}  />
+    </div>
+  </div>
+  <div className="authSTY">
+    <button className="ShareBTn" type="submit">Опубликовать</button>
+  </div>
+</form>
+
 
 
     </div>

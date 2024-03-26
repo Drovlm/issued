@@ -1,0 +1,71 @@
+.storyeffect {
+    width: 180px;
+    height: 180px; 
+    border-radius: 50%;
+    border: 8px solid #ffb700; 
+    position: absolute;
+    margin-bottom: 50px;
+    cursor: pointer;
+    animation: breathingAnimation 5s linear infinite;
+  }
+
+  @keyframes breathingAnimation {
+    0% {
+      border-color: #f9c43d;
+    }
+    25% {
+      border-color: #ffdc84;
+    }
+    50% {
+        border-color: #ffffff;
+      }
+    75% {
+        border-color: #ffdc84;
+      }
+    100% {
+      border-color: #f9c43d;
+    }
+  }
+
+.OfStory {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 101;
+}
+
+.story {
+    background-color: rgb(232, 232, 232);
+    border-radius: 5px;
+    width: 500px;
+    height: 600px;
+    padding: 20px;
+}
+.story_show {
+    display: block;
+}
+
+.story_name {
+    align-items: start;
+    justify-content: start;
+    text-align: start;
+}
+
+.img_of_story {
+    display: block;
+    padding: 10px;
+    width: 100%;
+    height: 300px;
+}
+
+.text_of_story {
+    display: block;
+    text-align: center;
+    height: 190px;
+}

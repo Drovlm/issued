@@ -2,7 +2,7 @@
     display:flex;
     width: 100%;
     position: fixed;
-    z-index: 999;
+    z-index: 100;
     height: 90px;
     justify-content: space-between;
     align-items: center;
@@ -114,7 +114,7 @@
     border-style: solid;
     border-width: 4px;
     border-color: #d1a537;
-    animation: breathingAnimation 5s linear infinite;
+    animation: breathingAnimation 3s linear infinite;
     cursor: pointer;
 }
 

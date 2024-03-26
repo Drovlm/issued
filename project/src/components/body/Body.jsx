@@ -5,7 +5,8 @@ import { SlSocialVkontakte } from "react-icons/sl";
 import { TiSocialFacebook } from "react-icons/ti";
 import { FaTelegramPlane } from "react-icons/fa";
 import './Body.css';
-import './Searchbar.css';
+import './Searchbar.css'; 
+import './story.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
 import SearchMenu from '../SearchMenu/SearchMenu';
@@ -20,6 +21,7 @@ const Body = ({ Search = {} }) => {
   const [images, setImages] = useState([]);
   const onClose = () => {
     setMenuOpen(false);
+    setStoryOpen(false);
   }
     
  useEffect(() => {
@@ -84,7 +86,7 @@ const filter = () => {
     issuey: '',
     institute:'',
     specialist:'',
-  })*/}
+  })
 
   const onSearch = (searchCriteria) => {
     setRecords(
@@ -97,12 +99,25 @@ const filter = () => {
           (selectedSpecialist ? f.specialist === selectedSpecialist : true)
       )
     );
-  };
+  };*/}
 
+  const [itemStates, setItemStates] = useState({});
+  
+  const toggleItemStory = (itemId) => {
+    setItemStates(prevState => ({
+      ...prevState,
+      [itemId]: !prevState[itemId] // Toggle the state for the specific item
+    }));
+  };
 
   const [isMenuOpen, setMenuOpen] = useState(false); 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
+  }
+
+  const [isStoryOpen, setStoryOpen] = useState(false);
+  const toggleStory = () => {
+    setStoryOpen(!isStoryOpen);
   }
 
   return ( 
@@ -164,7 +179,6 @@ const filter = () => {
          </select>
       </div>
 </div>   
-
         <div className="gro">
           <h1>Год выпуска</h1>
           <input className='text_y' type="number"></input>
@@ -181,11 +195,30 @@ const filter = () => {
         {records.map((item) => (
           <div className="offic_info" key={item.id}>
             <div className="CoverP">
-            <img className='imgP' src={item.img ? `data:img/jpeg;base64,${item.id}` : img}/>
+              <img className='imgP' src={item.img ? `data:img/jpeg;base64,${item.id}` : img}/>
             
             {/*<img className='imgP' src={item.img ? `http://localhost:3000/project/src/Admin/ImgApi.php?id=${item.id}` : img} />*/}
             
               {/*<img className='imgP' src={item.img ? `item:image/jpeg;base64,${item.img}` : img} />*/}
+              {item.story_image || item.story_text ? <div className='storyeffect' onClick={() => toggleItemStory(item.id)} ></div> : null}
+              {itemStates[item.id] && (
+                <div className='OfStory'>
+                  <div className="story">
+                    <div className="CloseIcon">
+                      <p className="Close" onClick={onClose}>×</p>
+                      <div className="story_show"> 
+                      <div style={{display:'block'}}>
+                  <p className="story_name" style={{fontSize:'20px', fontWeight:'700', padding:'10px'}}>{item.last} {item.name} {item.father}</p>
+                  </div>
+                  <div className='img_of_story'>{item.story_image}</div>
+                  <div className='text_of_story'>
+                  <h4 style={{padding:'15px'}}>{item.story_text}</h4>
+                  </div>
+                </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
             <div className="Pro">
               <p className="Full_name" style={{fontSize:'25px', fontWeight:'700'}}>{item.last} {item.name} {item.father}</p>

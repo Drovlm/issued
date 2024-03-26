@@ -1,13 +1,13 @@
 .footer{
     width: 100%;
-    position:relative;
-   
+    position: relative;
+    bottom: 0px;
     display: block;
     justify-content: space-between;
     text-align: left;
     justify-content: start;
     align-items: start;
-    margin-top: 220px;
+    margin-top: 180px;
 }
 
 .contants {

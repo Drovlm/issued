@@ -55,6 +55,7 @@
     border-width: 8px;
     border-color: rgb(215, 215, 215);
     cursor: pointer;
+    position: relative;
 }
 
 .imgU {
@@ -65,6 +66,7 @@
     border-width: 8px;
     border-color: rgb(215, 215, 215);
     cursor: pointer;
+    position: relative;
 }
 
 .Pro {

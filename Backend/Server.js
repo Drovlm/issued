@@ -6,6 +6,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(cors({
+  origin: 'http://localhost:3001', // Allow requests only from this origin
+}));
+
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -15,11 +19,12 @@ const db = mysql.createConnection({
 
   app.post('/register', (req, res) => {
     console.log(req.body);
-    const insertSql = "INSERT INTO login (name, last, father, `date`, email, password, institute, specialist, issuey, img, vkLink, telegramLink, instagramLink, facebookLink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const insertSql = "INSERT INTO login (name, last, father, `date`, email, password, institute, specialist, issuey, img, vkLink, telegramLink, instagramLink, facebookLink) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     const selectSql = "SELECT * FROM login WHERE email = ? AND password = ?";
-  
+
     db.query(insertSql, [req.body.name, req.body.last, req.body.father, req.body.date, req.body.email, req.body.password, 
-      req.body.institute, req.body.specialist, req.body.issuey, req.body.img, req.body.vkLink, req.body.telegramLink, req.body.instagramLink, req.body.facebookLink], (err, insertResult) => {
+      req.body.institute, req.body.specialist, req.body.issuey, req.body.img, req.body.vkLink, req.body.telegramLink,
+       req.body.instagramLink, req.body.facebookLink], (err, insertResult) => {
       if (err) {
         console.error("Error inserting data into database:", err);
         return res.status(500).json({ error: 'Error inserting data into database' });
@@ -39,8 +44,21 @@ const db = mysql.createConnection({
       });
     });
   });
-  
 
+  app.post('/addStory', (req, res) => {
+    console.log(req.body);
+    const insertSql = "INSERT INTO login (story_image, story_text) VALUES (?, ?)";
+    const { story_image, story_text } = req.body;
+
+    db.query(insertSql, [story_image, story_text], (err, result) => {
+        if (err) {
+            console.error("Error inserting data into database:", err);
+            return res.status(500).json({ error: 'Error inserting data into database' });
+        }
+        return res.status(200).json({ message: 'Story added successfully' });
+    });
+});
+  
   app.post('/login', (req, res) => {
     console.log(req.body);
     const selectSql = "SELECT id, name, img FROM login WHERE email = ? AND password = ?";
@@ -60,7 +78,7 @@ const db = mysql.createConnection({
     });
   });
 
-app.post('/story', (req, res) => {
+{/*app.post('/story', (req, res) => {
   console.log(req.body);
   const { id, story_text } = req.body;
   console.log("User ID:", id);
@@ -86,7 +104,7 @@ app.get('/story/:userId', (req, res) => {
       }
       return res.status(200).json({ stories });
   });
-});
+});*/}
 
 
 {/*
