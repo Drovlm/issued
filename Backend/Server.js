@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://localhost:3001', // Allow requests only from this origin
+  origin: 'http://localhost:3001',
 }));
 
 const db = mysql.createConnection({
@@ -44,39 +44,141 @@ const db = mysql.createConnection({
       });
     });
   });
-
-  app.post('/addStory', (req, res) => {
+  
+  app.post('/login', (req, res) => {
     console.log(req.body);
-    const insertSql = "INSERT INTO login (story_image, story_text) VALUES (?, ?)";
-    const { story_image, story_text } = req.body;
+    const selectSql = "SELECT id, name, img FROM login WHERE email = ? AND password = ?";
+  
+    db.query(selectSql, [req.body.email, req.body.password], (err, selectResult) => {
+      if (err) {
+        console.error("Error in login query:", err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+  
+      if (selectResult.length > 0) {
+        const { id, name, img } = selectResult[0];
+        console.log("User ID:", id);
+  
+        const sessionToken = generateSessionToken(id);
+        
+        return res.status(200).json({ message: 'Login Successfully', name, img, sessionToken });
+      } else {
+        return res.status(200).json({ message: 'Failed' });
+      }
+    });
+  });
 
-    db.query(insertSql, [story_image, story_text], (err, result) => {
+  function generateSessionToken(id) {
+    console.log("ID:", id)
+    return `token${id}`;
+  }
+
+  app.post('/addStory/', (req, res) => {
+    const { story_image, story_text } = req.body;
+    const id = 50; //the user's id
+    const updateSql = `UPDATE login SET story_image = ?, story_text = ? WHERE id = ${(id)}`;
+    db.query(updateSql, [story_image, story_text], (err, result) => {
         if (err) {
             console.error("Error inserting data into database:", err);
             return res.status(500).json({ error: 'Error inserting data into database' });
         }
         return res.status(200).json({ message: 'Story added successfully' });
     });
-});
-  
-  app.post('/login', (req, res) => {
-    console.log(req.body);
-    const selectSql = "SELECT id, name, img FROM login WHERE email = ? AND password = ?";
-      
-    db.query(selectSql, [req.body.email, req.body.password], (err, selectResult) => {
-      if (err) {
-        return res.status(500).json({ error: 'Error' });
-      }
-  
-      if (selectResult.length > 0) {
-        const { id, name, img } = selectResult[0]; 
-        console.log("User ID:", id); 
-        return res.status(200).json({ message: 'Login Successfully', name, img });
-      } else {
-        return res.status(200).json({ message: 'Failed' });
-      }
-    });
+}); 
+
+  const PORT = 8081;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
   });
+  
+
+
+
+{/*  app.post('/addStory', (req, res) => {
+    console.log(req.body);
+  
+    const selectSql = "SELECT id FROM login WHERE email = ? AND password = ?";
+    console.log("Email:", req.body.email);
+    console.log("Password:", req.body.password);
+    db.query(selectSql, [req.body.email, req.body.password], (err, selectResult) => {
+        if (err) {
+            console.error("Error selecting user:", err);
+            return res.status(500).json({ error: 'Error selecting user' });
+        }
+       
+        if (selectResult.length > 0) {
+            const id = selectResult[0].id;
+            const updateSql = "UPDATE login SET story_image = ?, story_text = ? WHERE id = ?";
+            const { story_text } = req.body;
+            db.query(updateSql, [ story_text, id], (err, result) => {
+                if (err) {
+                    console.error("Error updating story:", err);
+                    return res.status(500).json({ error: 'Error updating story' });
+                }
+                console.log("Story updated successfully");
+                return res.status(200).json({ message: 'Story added successfully' });
+            });
+        } else {
+            console.log("User not found");
+            return res.status(200).json({ message: 'User not found' });
+        }
+    });
+}); */}
+
+
+
+
+{/*  app.post('/addStory', (req, res) => {
+    console.log(req.body);
+    const updateSql = "UPDATE login SET story_image = ?, story_text = ? WHERE email = ?";const { story_image, story_text } = req.body;
+    db.query(updateSql, [story_image, story_text], (err, result) => {
+        if (err) {
+            console.error("Error inserting data into database:", err);
+            return res.status(500).json({ error: 'Error inserting data into database' });
+        }
+        return res.status(200).json({ message: 'Story added successfully' });
+    });
+}); */}
+
+
+
+{/*app.post('/addStory', (req, res) => {
+    console.log(req.body);
+    
+    const selectSql = "SELECT id FROM login WHERE email = ? AND password = ?";
+    console.log("Email:", req.body.email);
+    console.log("Password:", req.body.password);
+    db.query(selectSql, [req.body.email, req.body.password], (err, selectResult) => {
+        if (err) {
+            console.error("Error selecting user:", err);
+            return res.status(500).json({ error: 'Error selecting user' });
+        }
+
+        console.log("Select Result:", selectResult);
+
+        if (selectResult.length > 0) {
+            const userId = selectResult[0].id;
+            const updateSql = "UPDATE login SET story_image = ?, story_text = ? WHERE id = ?";
+            const { story_image, story_text } = req.body;
+            db.query(updateSql, [story_image, story_text, userId], (err, result) => {
+                if (err) {
+                    console.error("Error updating story:", err);
+                    return res.status(500).json({ error: 'Error updating story' });
+                }
+                console.log("Story updated successfully");
+                return res.status(200).json({ message: 'Story added successfully' });
+            });
+        } else {
+            console.log("User not found");
+            return res.status(200).json({ message: 'User not found' });
+        }
+    });
+}); */}
+
+
+
+
+
 
 {/*app.post('/story', (req, res) => {
   console.log(req.body);
@@ -129,10 +231,6 @@ app.post('/story', (req, res) => {
 }); */}
 
 
-const PORT = 8081;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 
 {/*const express = require('express');

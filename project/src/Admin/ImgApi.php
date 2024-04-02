@@ -18,18 +18,13 @@ if ($connect->connect_error) {
 $sql = "SELECT img FROM login ORDER BY ID DESC";
 $result = $connect->query($sql);
 
-$images = [];
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         if (!empty($row['img'])) {
-            $img = $row["img"];
-            $images[] = [
-                'img' => base64_encode($img)
-            ];
-        }
-    }
+        $img = $row["img"];
+        echo '<img src="data:image/jpeg;base64,' .base64_encode($img) . '">';
+    }}
 }
-echo json_encode($images);
 ?>
 
 
@@ -56,7 +51,25 @@ if ($result->num_rows > 0) {
     }
 }
 
-mysqli_close($connect);*/
+mysqli_close($connect);
+
+
+
+
+
+
+$images = [];
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        if (!empty($row['img'])) {
+            $img = $row["img"];
+            $images[] = [
+                'img' => base64_encode($img)
+            ];
+        }
+    }
+}
+echo json_encode($images);*/
 ?>
 
 
