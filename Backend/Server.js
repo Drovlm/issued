@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const session = require('express-session'); 
 const cors = require('cors');
 
 const app = express();
@@ -10,32 +11,39 @@ app.use(cors({
   origin: 'http://localhost:3001',
 }));
 
+app.use(session({
+  secret: '142753869',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(express.json());
+
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "register"  
-  });
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "register"  
+});
 
-  app.post('/register', (req, res) => {
-    console.log(req.body);
-    const insertSql = "INSERT INTO login (name, last, father, `date`, email, password, institute, specialist, issuey, img, vkLink, telegramLink, instagramLink, facebookLink) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    const selectSql = "SELECT * FROM login WHERE email = ? AND password = ?";
+app.post('/register', (req, res) => {
+  console.log(req.body);
+  const insertSql = "INSERT INTO login (name, last, father, `date`, email, password, institute, specialist, issuey, img, vkLink, telegramLink, instagramLink, facebookLink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  const selectSql = "SELECT * FROM login WHERE email = ? AND password = ?";
 
-    db.query(insertSql, [req.body.name, req.body.last, req.body.father, req.body.date, req.body.email, req.body.password, 
-      req.body.institute, req.body.specialist, req.body.issuey, req.body.img, req.body.vkLink, req.body.telegramLink,
-       req.body.instagramLink, req.body.facebookLink], (err, insertResult) => {
+  db.query(insertSql, [req.body.name, req.body.last, req.body.father, req.body.date, req.body.email, req.body.password, 
+    req.body.institute, req.body.specialist, req.body.issuey, req.body.img, req.body.vkLink, req.body.telegramLink,
+    req.body.instagramLink, req.body.facebookLink], (err, insertResult) => {
       if (err) {
         console.error("Error inserting data into database:", err);
         return res.status(500).json({ error: 'Error inserting data into database' });
       }
-  
+
       db.query(selectSql, [req.body.email, req.body.password], (err, selectResult) => {
         if (err) {
           console.error("Error selecting data from database:", err);
           return res.status(500).json({ error: 'Error selecting data from database' });
         }
-  
+
         if (selectResult.length > 0) {
           return res.status(200).json({ message: 'Login Successfully' });
         } else {
@@ -43,53 +51,55 @@ const db = mysql.createConnection({
         }
       });
     });
-  });
-  
-  app.post('/login', (req, res) => {
-    console.log(req.body);
-    const selectSql = "SELECT id, name, img FROM login WHERE email = ? AND password = ?";
-  
-    db.query(selectSql, [req.body.email, req.body.password], (err, selectResult) => {
-      if (err) {
-        console.error("Error in login query:", err);
-        return res.status(500).json({ error: 'Internal Server Error' });
-      }
-  
-      if (selectResult.length > 0) {
-        const { id, name, img } = selectResult[0];
-        console.log("User ID:", id);
-  
-        const sessionToken = generateSessionToken(id);
-        
-        return res.status(200).json({ message: 'Login Successfully', name, img, sessionToken });
-      } else {
-        return res.status(200).json({ message: 'Failed' });
-      }
-    });
-  });
+});
 
-  function generateSessionToken(id) {
-    console.log("ID:", id)
-    return `token${id}`;
-  }
+app.post('/login', (req, res) => {
+  console.log(req.body);
+  const selectSql = "SELECT name, img, id FROM login WHERE email = ? AND password = ?";
+  db.query(selectSql, [req.body.email, req.body.password], (err, selectResult) => {
+    if (err) {
+      console.error("Error in login query:", err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
 
-  app.post('/addStory/', (req, res) => {
-    const { story_image, story_text } = req.body;
-    const id = 50; //the user's id
-    const updateSql = `UPDATE login SET story_image = ?, story_text = ? WHERE id = ${(id)}`;
-    db.query(updateSql, [story_image, story_text], (err, result) => {
-        if (err) {
-            console.error("Error inserting data into database:", err);
-            return res.status(500).json({ error: 'Error inserting data into database' });
-        }
-        return res.status(200).json({ message: 'Story added successfully' });
-    });
-}); 
-
-  const PORT = 8081;
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    if (selectResult.length > 0) {
+      const { name, img, id } = selectResult[0];
+      console.log("User ID:", id);
+      const sessionToken = generateSessionToken(id);
+      return res.status(200).json({ message: 'Login Successfully', name, img, id, sessionToken });
+    } else {
+      return res.status(200).json({ message: 'Failed' });
+    }
   });
+});
+
+function generateSessionToken(id) {
+  console.log("ID:", id);
+  return id; 
+}
+
+app.post('/addStory/', (req, res) => {
+  const { story_image, story_text, id } = req.body;
+  
+  const updateSql = `UPDATE login SET story_image = ?, story_text = ? WHERE id = ?`;
+
+  db.query(updateSql, [story_image, story_text, id], (err, result) => {
+    if (err) {
+      console.error("Error inserting data into database:", err);
+      return res.status(500).json({ error: 'Error inserting data into database' });
+    }
+
+    console.log("ID Token:", id);
+
+    return res.status(200).json({ message: 'Story added successfully' });
+  });
+});
+
+const PORT = 8081;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
   
 
 

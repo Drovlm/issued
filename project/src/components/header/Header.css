@@ -90,31 +90,15 @@
     background-color: #e0a100;
 }
 
-@keyframes breathingAnimation {
-    0% {
-      border-color: #f9c43d;
-    }
-    25% {
-      border-color: #ffdc84;
-    }
-    50% {
-        border-color: #ffffff;
-      }
-    75% {
-        border-color: #ffdc84;
-      }
-    100% {
-      border-color: #f9c43d;
-    }
-  }
+
 
 .imgHeader {
     width: 55px;
     border-radius: 40px;
     border-style: solid;
     border-width: 4px;
-    border-color: #d1a537;
-    animation: breathingAnimation 3s linear infinite;
+    border-color: #f9c43d;
+
     cursor: pointer;
 }
 

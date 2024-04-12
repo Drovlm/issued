@@ -40,28 +40,28 @@ export const Register = ({ onClose }) => {
 
 const handleSubmit = (event) => {
   event.preventDefault();
-  setErrors(Validation(values));
+  const validationErrors = Validation(values);
+  setErrors(validationErrors); 
   if (
-    !errors.name &&
-    !errors.last &&
-    !errors.date &&
-    !errors.email &&
-    !errors.password &&
-    !errors.institute &&
-    !errors.specialist &&
-    !errors.issuey
+    !validationErrors.name &&
+    !validationErrors.last &&
+    !validationErrors.date &&
+    !validationErrors.email &&
+    !validationErrors.password &&
+    !validationErrors.institute &&
+    !validationErrors.specialist &&
+    !validationErrors.issuey
   ) {
     const formData = new FormData();
-    formData.append('name', values.name);
-    formData.append('last', values.last);
-    formData.append('father', values.father);
-    formData.append('date', values.date);
-    formData.append('email', values.email);
-    formData.append('password', values.password);
-    formData.append('institute', values.institute);
-    formData.append('specialist', values.specialist);
-    formData.append('issuey', values.issuey);
-    
+    formData.append('name', formData.name);
+    formData.append('last', formData.last);
+    formData.append('father', formData.father);
+    formData.append('date', formData.date);
+    formData.append('email', formData.email);
+    formData.append('password', formData.password);
+    formData.append('institute', formData.institute);
+    formData.append('specialist', formData.specialist);
+    formData.append('issuey', formData.issuey);
 
   axios.post('http://localhost:8081/register', values)
  

@@ -33,7 +33,8 @@ const LogIn = ({ onClose, onLoginSuccess }) => {
           console.log('Login Successfully');
           console.log('Username:', res.data.name);
           console.log('Image:', res.data.img);
-          onLoginSuccess(res.data.name);
+          console.log('Id:', res.data.id);
+          onLoginSuccess(res.data.name, res.data.img, res.data.id);
         } else {
           console.log('Failed');
         }
