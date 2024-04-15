@@ -62,6 +62,7 @@ const handleSubmit = (event) => {
     formData.append('institute', formData.institute);
     formData.append('specialist', formData.specialist);
     formData.append('issuey', formData.issuey);
+    formData.append('img', image); 
 
   axios.post('http://localhost:8081/register', values)
  
@@ -198,7 +199,6 @@ function handleIChange(event) {
         </div>
         <input type="password" id="password" name="password" onChange={handleInput} />
         
-        
         <div className="education_info">
         <div style={{textAlign:'start'}}>
                <label htmlFor="institute"><strong>Институт</strong><p style={{color:'red'}}>*</p></label>
@@ -236,7 +236,7 @@ function handleIChange(event) {
          <main className="main">
           <div className="photoupl">
             <div className="minform" action="" onClick={() => document.querySelector(".input-filed").click()}>
-                <input  htmlFor="img" id="img" type="file" accept="image/*" className="input-filed" hidden
+                <input id="img" type="file" accept="image/*" className="input-filed" hidden
                   onChange={({ target: { files } }) => {
                   files[0] && setFileName(files[0].name);
                     if (files) {

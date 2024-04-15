@@ -5,7 +5,7 @@ function Validation(values) {
   
     
     
-    if (values.email === "") {
+    if (values.email == "") {
         error.email = "Почта не указана"
     } else if (!email_pattern.test(values.email)) {
         error.email = "Аккаунт не найден"
@@ -13,7 +13,7 @@ function Validation(values) {
         error.email = ""
     }
 
-    if (values.password === "") {
+    if (values.password == "") {
         error.password = "Введите пароль";
       } else if (!password_pattern.test(values.password)) {
         error.password = "Неверный пароль";

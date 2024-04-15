@@ -20,27 +20,11 @@ const Body = ({ Search = {} }) => {
   /*const [ setSelectedInstitute] = useState('');*/
   /*const [setSelectedSpecialist] = useState('');*/
   const [images, setImages] = useState([]);
+  const [imageStry, setImageStry] = useState([]);
   const onClose = () => {
     setMenuOpen(false);
     setStoryOpen(false);
   }
-    
- useEffect(() => {
-    fetch('http://localhost:3000/project/src/Admin/ImgApi.php')
-    .then(res => res.json())
-    .then(data => {
-      data.forEach(item => {
-        if (item.img) {
-          const decodedImageData = atob(item.img);
-          item.img = decodedImageData;
-        }
-      });
-      setImages(data);
-    })
-    .catch(error => {
-      console.error('Error fetching image data:', error);
-    });
-}, []);
 
 useEffect(() => {
     fetch('http://localhost:3000/project/src/Admin/API.php')
@@ -55,6 +39,14 @@ useEffect(() => {
           }
         });
         setImages(data);
+
+        data.forEach(item => {
+          if (item.story_image) {
+            const decodedImageData = atob(item.story_image);
+            item.story_image = decodedImageData;
+          }
+        });
+        setImageStry(data);
       })
       .catch(error => console.error('Error fetching images:', error));
   }, []); 
@@ -196,11 +188,8 @@ const filter = () => {
         {records.map((item) => (
           <div className="offic_info" key={item.id}>
             <div className="CoverP">
-              <img className='imgP' src={item.img ? `data:img/jpeg;base64,${item.id}` : img}/>
-            
-            {/*<img className='imgP' src={item.img ? `http://localhost:3000/project/src/Admin/ImgApi.php?id=${item.id}` : img} />*/}
-            
-              {/*<img className='imgP' src={item.img ? `item:image/jpeg;base64,${item.img}` : img} />*/}
+            <img className='imgP' src={item.img ? `data:image/jpeg;base64,${btoa(item.img)}` : img} />
+
               {item.story_image || item.story_text ? <div className='storyeffect' onClick={() => toggleItemStory(item.id)} ></div> : null}
               {itemStates[item.id] && (
                 <div className='OfStory'>
@@ -211,7 +200,7 @@ const filter = () => {
                       <div style={{display:'block'}}>
                   <p className="story_name" style={{fontSize:'20px', fontWeight:'700', padding:'10px'}}>{item.last} {item.name} {item.father}</p>
                   </div>
-                  <div className='img_of_story'>{item.story_image}</div>
+                  <div className='img_of_story' src={item.story_image ? `data:image/jpeg;base64,${btoa(item.story_image)}` : img} />
                   <div className='text_of_story'>
                   <h4 style={{padding:'15px'}}>{item.story_text}</h4>
                   </div>

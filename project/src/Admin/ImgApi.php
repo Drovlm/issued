@@ -10,7 +10,6 @@ $password = "";
 $dbname = "register";
 
 $connect = mysqli_connect($servername, $username, $password, $dbname);
-
 if ($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
 }
@@ -18,17 +17,17 @@ if ($connect->connect_error) {
 $sql = "SELECT img FROM login ORDER BY ID DESC";
 $result = $connect->query($sql);
 
+$imageData = array();
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         if (!empty($row['img'])) {
-        $img = $row["img"];
-        echo '<img src="data:image/jpeg;base64,' .base64_encode($img) . '">';
-    }}
+            $img = $row["img"];
+            $imageData[] = base64_encode($img);
+        }
+    }
 }
+echo json_encode($imageData);
 ?>
-
-
-
 
 <?php
 /*if ($result->num_rows > 0) {

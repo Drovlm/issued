@@ -15,10 +15,11 @@ const Header = () => {
   const [regOpen, setRegOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({ name: '', img: '', id: '' });
-  const [records, setRecords] = useState([]);
   const [image, setImage] = useState(null);
   const [story, setStory] = useState('');
-  const [images, setImages] = useState(null);
+  const [records, setRecords] = useState([]);
+  const [images, setImages] = useState([]);
+  const [data, setData] = useState([]);
 
   const onClose = () => {
     setStoryPOpen(false);
@@ -36,7 +37,6 @@ const Header = () => {
   const handleLoginSuccess = async (name, img, id) => {
     setIsLoggedIn(true);
     setUserInfo({ name, img, id });
-    alert(id);
     setModalOpen(false);
   };
 
@@ -64,7 +64,7 @@ const Header = () => {
       .then((response) => {
         console.log('Response:', response.data);
         alert('История успешно добавлена.');
-        setImage(null);
+        setImage('');
         setStory('');
       })
       .catch((err) => {
@@ -78,6 +78,23 @@ const Header = () => {
   const handleMenuClick = () => {
     setMenuOpen(!isMenuOpen);
   }
+
+  useEffect(() => {
+    fetch('http://localhost:3000/project/src/Admin/API.php')
+      .then(res => res.json())
+      .then(data => {
+        setData(data);
+        setRecords(data);
+        data.forEach(userInfo => {
+          if (userInfo.img) {
+            const decodedImageData = atob(userInfo.img);
+            userInfo.img = decodedImageData;
+          }
+        });
+        setImages(data);
+      })
+      .catch(error => console.error('Error fetching images:', error));
+  }, []); 
 
   return (
     <div className="header">
@@ -93,9 +110,17 @@ const Header = () => {
           <>
             <div className="user-info">
               <p className="user-name">{userInfo.name}</p>
-              
             </div>
-            <img onClick={toggleMenu} className='imgHeader' src={userInfo.img ? `http://localhost:3000/project/src/API.php${userInfo.img}` : img} />
+
+            {records.map((item) => {
+              if (item.id == userInfo.id) {
+                return (
+                  <div key={item.id}> 
+                    <img onClick={toggleMenu} className='imgHeader' src={item.img ? `data:image/jpeg;base64,${btoa(item.img)}` : img} />
+                  </div>
+                );
+              }})}
+
             {isStoryPOpen && (
   <div className='StorySection'>
     <div className="storywin">
@@ -104,10 +129,10 @@ const Header = () => {
       </div>
 
       <form onSubmit={handleSubmit}>
-  <div className="StoryImage" action="" onClick={() => document.querySelector(".input-filed").click()}>
-    <input htmlFor="sty" id="sty" type="file" accept="image/*" className="input-filed" hidden
-      onChange={({ target: { files } }) => {
-        if (files) {
+        <div className="StoryImage" action="" onClick={() => document.querySelector(".input-filed").click()}>
+          <input htmlFor="sty" id="sty" type="file" accept="image/*" className="input-filed" hidden
+           onChange={({ target: { files } }) => {
+            if (files) {
           setImage(URL.createObjectURL(files[0]));
         } }}/>
     {image ? (

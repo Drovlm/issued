@@ -11,17 +11,16 @@
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: 12px;
-    row-gap: 120px;
+    column-gap: 40px;
+    row-gap: 130px;
     padding: 50px;
-    padding-top: 150px;
+    padding-top: 160px;
     grid-template-rows:  auto;
 } 
 
 .offic_info {
-    height: 370px;
+    height: 360px;
     padding: 10px;
-    margin-left: 30px;
     background-color: rgb(235, 235, 235);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -135,7 +134,7 @@
 
 @media screen and (max-width: 1545px) {
     .Cards {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
 
@@ -149,19 +148,64 @@
 
 @media screen and (max-width: 970px) {
     .Cards {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr; 
+    }
+    .offic_info {
+        margin-left: 30px;
+        width: 330px;
+        height: 350px;
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 810px) {
+    .Cards {
+        column-gap: 5px;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
     .offic_info {
-        margin-left: 20px;
+        width: 320px;
+        height: 350px;
     }
     }
 
+    @media screen and (max-width: 760px) {
+        .Cards {
+            column-gap: 0px;
+            padding-left: 8px;
+        }
+        .offic_info {
+            width: 300px;
+            height: 350px;
+        }
+        }
+
+        @media screen and (max-width: 700px) {
+            .offic_info {
+                margin-left: 10px;
+            }
+            }
+
 @media screen and (max-width: 650px) {
     .Cards {
-        grid-template-columns: 1fr;
-        margin-left: 20px;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+    }
+    .offic_info {
+        width: 280px;
+        height: 350px;
     }
     }
+
+    @media screen and (max-width: 620px) {
+        .Cards {
+            grid-template-columns: 1fr;
+            justify-content: center;
+            align-items: center;
+            padding-left: 20px;
+        }
+        .offic_info {
+            width: 400px;
+            height: 350px;
+        }
+        }

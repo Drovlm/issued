@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
   }
   
   .auth-form, .login-form {
@@ -23,7 +24,7 @@
     justify-content: space-between;
     color: red;
     background-color: rgb(255, 211, 211);
-    width: 100%;
+    width: 95%;
     text-align: start;
     font-size: 15px;
     padding: 2px;

@@ -25,8 +25,12 @@ const db = mysql.createConnection({
   database: "register"  
 });
 
+const fs = require('fs');
+
 app.post('/register', (req, res) => {
   console.log(req.body);
+  console.log(req.body.img);
+  const { img } = req.body;
   const insertSql = "INSERT INTO login (name, last, father, `date`, email, password, institute, specialist, issuey, img, vkLink, telegramLink, instagramLink, facebookLink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   const selectSql = "SELECT * FROM login WHERE email = ? AND password = ?";
 
@@ -80,17 +84,13 @@ function generateSessionToken(id) {
 
 app.post('/addStory/', (req, res) => {
   const { story_image, story_text, id } = req.body;
-  
   const updateSql = `UPDATE login SET story_image = ?, story_text = ? WHERE id = ?`;
-
   db.query(updateSql, [story_image, story_text, id], (err, result) => {
     if (err) {
       console.error("Error inserting data into database:", err);
       return res.status(500).json({ error: 'Error inserting data into database' });
     }
-
     console.log("ID Token:", id);
-
     return res.status(200).json({ message: 'Story added successfully' });
   });
 });
