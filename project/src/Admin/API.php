@@ -24,6 +24,10 @@ while ($row = mysqli_fetch_assoc($result)) {
         $image_data = base64_encode($row['img']);
         $row['img'] = $image_data;
     }
+     if (!empty($row['story_image'])) {
+        $image_data = base64_encode($row['story_image']);
+        $row['story_image'] = $image_data;
+    }
     $json_array[] = $row;
 }
 

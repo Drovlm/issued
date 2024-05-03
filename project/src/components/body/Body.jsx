@@ -13,12 +13,10 @@ import SearchMenu from '../SearchMenu/SearchMenu';
 
 
 const Body = ({ Search = {} }) => {
-  const { users, req, selectedInstitute, selectedSpecialist, loadUsers, selectInstetut, selectSpecialist, } = SearchMenu();
+  const { users, req, selectedInstitute, selectedSpecialist, selectInstetut, selectSpecialist, } = SearchMenu();
   const [data, setData] = useState([]);
   const [records, setRecords] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  /*const [ setSelectedInstitute] = useState('');*/
-  /*const [setSelectedSpecialist] = useState('');*/
   const [images, setImages] = useState([]);
   const [imageStry, setImageStry] = useState([]);
   const onClose = () => {
@@ -123,7 +121,7 @@ const filter = () => {
         <input className="SearchN" type="number" placeholder="Год выпуска" onChange={(e) => setSearchQuery(e.target.value)} />
        
 
-              {/* REAL TI<E SEARCH */}
+              {/* REAL TIME SEARCH */}
  {/*<input className="SearchS" type="text" placeholder="Фамилия" onChange={(e) => {
   setSearch({ ...search, last: e.target.value });
   setRecords(data.filter(f => f.last.toLowerCase().includes(e.target.value.toLowerCase())));
@@ -194,18 +192,21 @@ const filter = () => {
               {itemStates[item.id] && (
                 <div className='OfStory'>
                   <div className="story">
-                    <div className="CloseIcon">
+                  <div className="CloseIcon" style={{height: '30px'}}>
                       <p className="Close" onClick={onClose}>×</p>
                       <div className="story_show"> 
                       <div style={{display:'block'}}>
-                  <p className="story_name" style={{fontSize:'20px', fontWeight:'700', padding:'10px'}}>{item.last} {item.name} {item.father}</p>
                   </div>
-                  <div className='img_of_story' src={item.story_image ? `data:image/jpeg;base64,${btoa(item.story_image)}` : img} />
+                  <div className='border_img'>
+                  <img className='img_of_story' src={item.story_image ? `data:image/jpeg;base64,${btoa(item.story_image)}` : img} />
+                  </div>
                   <div className='text_of_story'>
-                  <h4 style={{padding:'15px'}}>{item.story_text}</h4>
+                  <p style={{padding:'15px'}}>{item.story_text}</p>
                   </div>
                 </div>
                     </div>
+                    <p className="story_name" style={{fontSize:'20px', fontWeight:'500'}}>{item.last} {item.name} {item.father}</p>
+                  
                   </div>
                 </div>
               )}

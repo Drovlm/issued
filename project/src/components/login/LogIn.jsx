@@ -51,7 +51,7 @@ const LogIn = ({ onClose, onLoginSuccess }) => {
         <h1>Вход</h1>
 
         <form className="login-form" onSubmit={handleSubmit}>
-          <label htmlFor="email">Электронной почты</label>
+          <label htmlFor="email">Электронная почта</label>
           <input type="email" placeholder="example@mail.com" id="email" name="email" onChange={(e) => { handleInput(e); setEmail(e.target.value)}}/>
           {errors.email && <span className='text-danger'> {errors.email} </span>}
 

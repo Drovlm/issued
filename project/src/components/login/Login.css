@@ -8,7 +8,6 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
   }
   
   .auth-form, .login-form {

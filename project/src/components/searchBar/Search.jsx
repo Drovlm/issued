@@ -1,8 +1,5 @@
 import React from 'react';
 import './Searchbar.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
-import SearchMenu from '../SearchMenu/SearchMenu';
 
 const Search = ({ setSearch, data, setRecords }) => {
   return (

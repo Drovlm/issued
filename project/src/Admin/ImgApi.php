@@ -14,7 +14,7 @@ if ($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
 }
 
-$sql = "SELECT img FROM login ORDER BY ID DESC";
+$sql = "SELECT story_image FROM login ORDER BY ID DESC";
 $result = $connect->query($sql);
 
 $imageData = array();
