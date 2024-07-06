@@ -1,4 +1,3 @@
-"# issued" 
 # Выпускники РТУ МИРЭА
 
 ## Table of Contents
