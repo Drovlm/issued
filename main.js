@@ -1,1 +1,1 @@
-console.log("Issued")
+const pair = "take";
