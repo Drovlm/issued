@@ -10,6 +10,7 @@ import './story.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
 import SearchMenu from '../SearchMenu/SearchMenu';
+import { IoIosMenu } from "react-icons/io";
 
 
 const Body = ({ Search = {} }) => {
@@ -114,6 +115,9 @@ const filter = () => {
   return ( 
     <div className="body">
       <div className="SearchBar">
+      <div className="menuu">
+      <IoIosMenu />
+            </div>
 
             {/*SEARCH BY CLICKING on "faSearch" ICON*/}
        <input className="SearchS" type="text" placeholder="Фамилия" onChange={(e) => setSearchQuery(e.target.value)}/>

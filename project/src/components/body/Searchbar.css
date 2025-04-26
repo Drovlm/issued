@@ -13,6 +13,24 @@
     border-bottom-right-radius: 15px;
 }
 
+.menuu {
+    background-color:#ffb700 ;
+    color: white;
+    height: 35px;
+    width: 35px;
+    border-radius: 8px;
+    border-style: none;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    padding-top: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: 0.3s;
+    left: 10px;
+}
+
 .SearchS {
     display: inline-block;
     background-color: rgb(230, 230, 230);

@@ -10,7 +10,7 @@
 .Cards {
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     column-gap: 40px;
     row-gap: 130px;
     padding: 40px;

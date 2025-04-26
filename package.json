@@ -2,7 +2,7 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "axios": "^1.6.7",
+    "axios": "^1.9.0",
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.2",
     "buffer": "^6.0.3",
